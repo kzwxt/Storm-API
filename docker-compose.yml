@@ -13,9 +13,6 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
-    volumes:
-      # Uncomment for development (hot reload)
-      # - .:/app
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s

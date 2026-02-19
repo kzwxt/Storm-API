@@ -107,9 +107,19 @@ Client → Middleware → Routes → Service → STORM
 | Integration Tests | 14 | ✅ |
 | **Total** | **58** | ✅ |
 
-**Run Tests:**
+**Run all tests:**
+```bash
+poetry run pytest tests/ -v
+```
+
+**To run only fast tests (skip slow ones):**
 ```bash
 poetry run pytest tests/ -v -m "not slow"
+```
+
+**To see detailed output:**
+```bash
+poetry run pytest tests/ -v -s
 ```
 
 ---
@@ -126,8 +136,6 @@ poetry run pytest tests/ -v -m "not slow"
 
 ---
 
-## 👤 About
+## 👤 Author
 
-**Amirul Mifzal** - AI Engineer
-
-Production-ready API with clean architecture, type safety, and comprehensive testing.
+**Amirul Mifzal**

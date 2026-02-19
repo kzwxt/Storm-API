@@ -2,6 +2,7 @@
 
 import os
 import queue
+import tempfile
 import threading
 from typing import Dict, Generator, List, Optional
 
@@ -190,8 +191,10 @@ class StormService:
 
         try:
             # Step 1: Configure pipeline parameters
-            # Use dummy path - files won't be written to disk
-            args = self._build_runner_args("/dev/null")
+            # Use temporary directory path - files won't be written to disk
+            import tempfile
+            temp_dir = tempfile.mkdtemp()
+            args = self._build_runner_args(temp_dir)
 
             # Step 2: Create STORM runner
             runner = STORMWikiRunner(
