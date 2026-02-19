@@ -135,6 +135,8 @@ async def stream_article_generator(topic: str, service: StormService) -> AsyncGe
     """
     Async generator that streams article generation progress.
 
+    Runs the STORM pipeline in a thread pool to avoid blocking the event loop.
+
     Args:
         topic: Research topic to generate article about
         service: StormService instance to run the pipeline
@@ -150,7 +152,8 @@ async def stream_article_generator(topic: str, service: StormService) -> AsyncGe
         ...     print(chunk)
     """
     try:
-        for chunk in service.run_with_streaming(topic):
+        # Run streaming in thread pool to avoid blocking event loop
+        for chunk in await run_in_threadpool(service.run_with_streaming, topic):
             yield chunk
     except Exception as e:
         yield f"❌ Error: {str(e)}\n"
@@ -200,7 +203,8 @@ async def query(req: StormRequest, service: StormService = Depends(get_storm_ser
                 media_type="text/plain"
             )
         else:
-            result: str = service.run(req.topic)
+            # Run STORM in thread pool to avoid blocking event loop
+            result: str = await run_in_threadpool(service.run, req.topic)
             return StormResponse(result=result)
 
     except Exception as e:
