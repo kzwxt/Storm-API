@@ -3,7 +3,7 @@
 import os
 import queue
 import threading
-from typing import Dict, Generator, Optional
+from typing import Dict, Generator, List, Optional
 
 from dotenv import load_dotenv
 
@@ -38,9 +38,21 @@ def _exists_in_memory(file_path: str) -> bool:
     key = _normalize_path(file_path)
     return key in _IN_MEMORY_STORAGE
 
-def _list_files_in_memory(directory: str = "") -> list:
-    """List all files in memory storage."""
-    prefix = _normalize_path(directory)
+def _list_files_in_memory(directory: str = "") -> List[str]:
+    """
+    List all files in memory storage.
+
+    Args:
+        directory: Optional directory path to filter files
+
+    Returns:
+        List[str]: List of file paths stored in memory
+
+    Example:
+        >>> files = _list_files_in_memory("topic")
+        >>> print(files)
+    """
+    prefix: str = _normalize_path(directory)
     if not prefix.endswith("/") and prefix:
         prefix += "/"
     return [key for key in _IN_MEMORY_STORAGE.keys() if key.startswith(prefix)]
@@ -389,8 +401,17 @@ class StormService:
             max_thread_num=self._get_int_env("MAX_THREAD_NUM", DEFAULT_MAX_THREAD_NUM)
         )
 
-    def _get_pipeline_config(self) -> dict:
-        """Get pipeline stage configuration"""
+    def _get_pipeline_config(self) -> Dict[str, bool]:
+        """
+        Get pipeline stage configuration.
+
+        Returns:
+            Dict[str, bool]: Dictionary mapping stage names to boolean flags
+
+        Example:
+            >>> config = self._get_pipeline_config()
+            >>> print(config["do_research"])
+        """
         return {
             "do_research": self._get_bool_env("DO_RESEARCH", True),
             "do_generate_outline": self._get_bool_env("DO_GENERATE_OUTLINE", True),
@@ -444,9 +465,22 @@ class StormService:
     # -------------------------------------------------------------------------
 
     def _format_error(self, error_type: str, message: str) -> Exception:
-        """Format error with traceback for debugging"""
+        """
+        Format error with traceback for debugging.
+
+        Args:
+            error_type: Type/category of the error
+            message: Error message description
+
+        Returns:
+            Exception: Formatted exception with traceback
+
+        Example:
+            >>> error = self._format_error("Validation", "Invalid input")
+            >>> raise error
+        """
         import traceback
-        full_message = f"STORM {error_type}: {message}\nTraceback: {traceback.format_exc()}"
+        full_message: str = f"STORM {error_type}: {message}\nTraceback: {traceback.format_exc()}"
         return Exception(full_message)
 
 
@@ -468,13 +502,13 @@ def get_memory_storage_size() -> int:
     return len(_IN_MEMORY_STORAGE)
 
 
-def get_memory_storage_files() -> list:
+def get_memory_storage_files() -> List[str]:
     """
     Get list of all files currently in memory storage.
-    
+
     Returns:
-        List of file paths stored in memory
-        
+        List[str]: List of file paths stored in memory
+
     Example:
         >>> from core.storm_service import get_memory_storage_files
         >>> files = get_memory_storage_files()
