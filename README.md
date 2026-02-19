@@ -340,96 +340,139 @@ python test_stream.py
 
 ---
 
-## 👤 Author
+## 👤 About the Developer
 
-Amirul Mifzal
+**Amirul Mifzal** - AI Engineer
+
+This project demonstrates expertise in building production-ready AI/ML APIs with emphasis on:
+- Clean architecture and design patterns
+- Type safety and code quality
+- Comprehensive testing
+- Scalable async operations
+- Production deployment readiness
 
 ---
 
-## 📦 Project Submission Package
+## 📦 Technical Assessment Summary
 
-### For Lecturer Review
+### Project Overview
+A production-ready FastAPI wrapper for Stanford STORM that generates comprehensive articles using AI. Demonstrates full-stack development skills with focus on scalability, maintainability, and production readiness.
 
-This project is submitted as a GitHub repository with complete source code, documentation, and testing infrastructure.
+### Key Technical Demonstrations
 
-**Repository URL:** https://github.com/kzwxt/Storm-API
+#### 1. Clean Architecture & Design Patterns
+- **Separation of Concerns**: Modular structure (api/core/utils/tests)
+- **Service Layer Pattern**: Business logic isolated from routes
+- **Dependency Injection**: FastAPI `Depends()` for testability
+- **Middleware Pattern**: Request ID tracing for debugging
+- **Factory Pattern**: Singleton service instance management
 
-### Submission Checklist
+#### 2. Production-Ready Features
+- **Health Monitoring**: Dedicated `/health` endpoint with uptime tracking
+- **Structured Logging**: JSON logs with request tracing for observability
+- **Error Handling**: Comprehensive validation and exception handling
+- **Input Validation**: Pydantic models with XSS protection
+- **Configuration Management**: Environment-based configuration
 
-- ✅ **Source Code**: Complete implementation in modular architecture
-- ✅ **Documentation**: Comprehensive README with setup instructions
-- ✅ **Testing**: 58 tests (unit + integration) with 100% pass rate
-- ✅ **Docker Support**: Dockerfile and docker-compose.yml for easy deployment
-- ✅ **API Documentation**: Interactive Swagger UI at `/docs`
-- ✅ **Type Hints**: Complete type annotations throughout codebase
-- ✅ **Docstrings**: Google-style documentation for all functions/classes
-- ✅ **Logging**: Structured JSON logging with request tracing
-- ✅ **Error Handling**: Proper exception handling and validation
-- ✅ **Async/Await**: Non-blocking operations using run_in_threadpool
+#### 3. Performance & Scalability
+- **Async Operations**: Non-blocking I/O using `run_in_threadpool()`
+- **Streaming Support**: Real-time progress updates without blocking
+- **Resource Management**: In-memory storage prevents disk I/O
+- **Connection Pooling**: Efficient resource utilization
 
-### Key Features Demonstrated
+#### 4. Code Quality
+- **Type Safety**: Complete type hints throughout codebase
+- **Documentation**: Google-style docstrings for all functions/classes
+- **Testing**: 58 tests (unit + integration) with 100% pass rate
+- **Linting Ready**: Configured for ruff, black, mypy
 
-1. **Clean Architecture**: Separation of concerns (api/core/utils/tests)
-2. **Production Ready**: Health checks, logging, error handling
-3. **Scalability**: Async operations, streaming support
-4. **Maintainability**: Type hints, docstrings, comprehensive tests
-5. **Deployment**: Docker support for consistent environments
+#### 5. DevOps & Deployment
+- **Docker Support**: Containerized application for consistent deployment
+- **Docker Compose**: Easy local development setup
+- **CI/CD Ready**: Structure supports GitHub Actions
+- **API Documentation**: Interactive Swagger UI
 
-### Quick Evaluation Steps
+### Technical Stack Proficiency
 
-**Method 1: Docker (Fastest - ~5 minutes)**
+| Technology | Level | Demonstrated Skills |
+|------------|-------|---------------------|
+| Python 3.11+ | Expert | Type hints, async/await, generators |
+| FastAPI | Expert | Dependency injection, middleware, streaming |
+| Pydantic | Expert | Validation, models, error handling |
+| Testing | Advanced | Unit tests, integration tests, mocking |
+| Docker | Intermediate | Containerization, docker-compose |
+| AI/ML | Intermediate | LLM integration, streaming callbacks |
+| Architecture | Expert | Clean architecture, design patterns |
+
+### Problem-Solving Examples
+
+#### Challenge 1: Blocking Operations
+**Problem:** STORM pipeline blocks event loop for 60+ seconds
+**Solution:** Implemented `run_in_threadpool()` for non-blocking async operations
+**Impact:** Server can handle concurrent requests, improved throughput
+
+#### Challenge 2: File System Pollution
+**Problem:** STORM writes temporary files to disk
+**Solution:** Overrode `FileIOHelper` with in-memory storage
+**Impact:** Clean execution, no side effects, faster I/O
+
+#### Challenge 3: Debugging Distributed Requests
+**Problem:** Hard to trace requests across service calls
+**Solution:** Implemented request ID middleware with context tracking
+**Impact:** Easy debugging, complete request lifecycle visibility
+
+### Metrics & Achievements
+
+| Metric | Value |
+|--------|-------|
+| **Test Coverage** | 58 tests (100% pass rate) |
+| **Code Quality** | Full type hints, complete docstrings |
+| **Performance** | Non-blocking async operations |
+| **Documentation** | Comprehensive README + API docs |
+| **Deployment** | Docker containerized |
+| **Lines of Code** | ~2000+ (including tests) |
+| **Files** | 15+ Python modules |
+
+### Quick Evaluation for Joget
+
+**Clone & Run (5 minutes):**
 ```bash
 git clone https://github.com/kzwxt/Storm-API.git
 cd Storm-API
 cp .env.example .env
-# Add API keys to .env
+# Add your API keys
 docker-compose up
 # Visit http://localhost:8000/docs
 ```
 
-**Method 2: Local Python (Requires Poetry)**
+**Run Tests (2 minutes):**
 ```bash
-git clone https://github.com/kzwxt/Storm-API.git
-cd Storm-API
-poetry install
-cp .env.example .env
-# Add API keys to .env
-poetry run uvicorn main:app --reload
-# Visit http://localhost:8000/docs
-```
-
-**Running Tests:**
-```bash
-# Quick test suite (~10 seconds)
 poetry run pytest tests/ -v -m "not slow"
-
-# Full test suite (~10 minutes)
-poetry run pytest tests/ -v
 ```
 
-### Project Highlights
+**What to Review:**
+1. **Code Quality**: Check type hints, docstrings, structure
+2. **Architecture**: Review modular design and separation of concerns
+3. **Testing**: Run test suite and examine test coverage
+4. **API Design**: Try interactive docs at `/docs`
+5. **Production Features**: Check health endpoint, logging, error handling
 
-| Aspect | Details |
-|--------|---------|
-| **Language** | Python 3.11+ |
-| **Framework** | FastAPI |
-| **Testing** | Pytest with 58 tests |
-| **Deployment** | Docker & Docker Compose |
-| **Documentation** | Interactive API docs |
-| **Code Quality** | Type hints, docstrings, linting ready |
-| **Architecture** | Modular, clean design patterns |
-| **API Endpoints** | Health check, query, streaming |
-| **Response Time** | Fast tests: ~10s, Full pipeline: ~700s |
+### Why This Matters for Joget
 
-### Technical Achievements
+This project demonstrates:
+- ✅ Ability to build production-ready AI/ML APIs
+- ✅ Understanding of scalable architecture
+- ✅ Focus on code quality and maintainability
+- ✅ Experience with modern Python frameworks
+- ✅ Problem-solving and optimization skills
+- ✅ DevOps awareness (Docker, CI/CD)
+- ✅ Attention to detail (testing, documentation)
 
-- ✅ Implemented Stanford STORM wrapper with streaming
-- ✅ Prevented disk writes with in-memory storage
-- ✅ Added request tracing with unique IDs
-- ✅ Structured JSON logging for monitoring
-- ✅ Comprehensive input validation with XSS protection
-- ✅ Non-blocking async operations
-- ✅ Complete test coverage (unit + integration)
-- ✅ Docker containerization
-- ✅ Type-safe codebase with full type hints
-- ✅ Professional documentation
+### Next Steps
+
+For deeper evaluation, review:
+1. `api/routes.py` - API endpoint design and async patterns
+2. `core/storm_service.py` - Business logic and service layer
+3. `utils/middleware.py` - Middleware implementation
+4. `tests/` - Test coverage and quality
+5. `Dockerfile` - Containerization best practices
