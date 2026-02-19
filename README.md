@@ -22,21 +22,33 @@ FastAPI wrapper for Stanford STORM with streaming, monitoring, and in-memory sto
 
 ```text
 storm-api/
-├── main.py                      # FastAPI entry point
-├── pyproject.toml               # Poetry dependencies
+├── main.py                          # FastAPI entry point
+├── pyproject.toml                   # Poetry dependencies
 ├── poetry.lock
-├── .env.example                 # Environment template
+├── pytest.ini                       # Pytest configuration
+├── .env.example                     # Environment template
+├── .gitignore                       # Git ignore rules
 ├── api/
-│   ├── models.py                # Request/response schemas
-│   └── routes.py                # API endpoints
+│   ├── __init__.py
+│   ├── models.py                    # Request/response schemas with Pydantic
+│   └── routes.py                    # API endpoints with async handlers
 ├── core/
-│   ├── storm_service.py         # STORM wrapper with in-memory storage
-│   └── streaming_callback.py    # STORM progress callbacks
+│   ├── __init__.py
+│   ├── storm_service.py             # STORM wrapper with in-memory storage
+│   └── streaming_callback.py        # STORM progress callbacks for streaming
 ├── utils/
-│   ├── logging_config.py        # Structured logging
-│   └── middleware.py            # Request ID middleware
+│   ├── __init__.py
+│   ├── helpers.py                   # Helper utilities
+│   ├── logging_config.py            # Structured JSON logging configuration
+│   └── middleware.py                # Request ID middleware for tracing
 ├── tests/
-│   └── test_stream.py           # Streaming tests
+│   ├── __init__.py
+│   ├── test_stream.py               # Manual streaming test script
+│   ├── test_in_memory_storage.py    # In-memory storage unit tests
+│   ├── test_integration.py          # API integration tests
+│   ├── test_request_id_middleware.py # Middleware unit tests
+│   ├── test_storm_service.py        # StormService unit tests
+│   └── test_streaming_callback.py   # Streaming callback unit tests
 └── README.md
 ```
 
