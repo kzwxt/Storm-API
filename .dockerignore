@@ -41,5 +41,7 @@ Thumbs.db
 README.md
 docs/
 
-# Poetry
-poetry.lock (optional - keep if you want reproducible builds)
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
