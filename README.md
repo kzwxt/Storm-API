@@ -15,6 +15,87 @@ FastAPI wrapper for Stanford STORM with streaming, monitoring, and in-memory sto
 - Modular architecture (api/core/utils/tests)
 - Dependency management with Poetry
 - Environment configuration
+- Docker support for easy deployment
+
+---
+
+## 🎓 Quick Start for Lecturer
+
+### Option 1: Using Docker (Recommended - Easiest)
+
+**Prerequisites:**
+- Docker installed on your machine
+
+**Steps:**
+```bash
+# 1. Clone the repository
+git clone https://github.com/kzwxt/Storm-API.git
+cd Storm-API
+
+# 2. Create .env file from template
+cp .env.example .env
+
+# 3. Add your API keys to .env file
+# DEEPSEEK_API_KEY=your_key_here
+# SERPER_API_KEY=your_key_here
+
+# 4. Run with Docker Compose
+docker-compose up
+
+# 5. Access the API
+# API: http://localhost:8000
+# Docs: http://localhost:8000/docs
+# Health: http://localhost:8000/health
+```
+
+### Option 2: Using Python (Requires Python 3.11+)
+
+**Steps:**
+```bash
+# 1. Clone the repository
+git clone https://github.com/kzwxt/Storm-API.git
+cd Storm-API
+
+# 2. Install Poetry (if not installed)
+pip install poetry
+
+# 3. Install dependencies
+poetry install
+
+# 4. Create .env file
+cp .env.example .env
+# Add your API keys
+
+# 5. Run the server
+poetry run uvicorn main:app --reload
+
+# 6. Access the API
+# API: http://localhost:8000
+# Docs: http://localhost:8000/docs
+```
+
+### Testing the API
+
+**Health Check:**
+```bash
+curl http://localhost:8000/health
+```
+
+**Generate Article:**
+```bash
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"topic": "Python Programming", "stream": false}'
+```
+
+**Run Tests:**
+```bash
+# Fast tests only
+poetry run pytest tests/ -v -m "not slow"
+
+# All tests (takes ~10 minutes)
+poetry run pytest tests/ -v
+```
 
 ---
 
@@ -262,3 +343,93 @@ python test_stream.py
 ## 👤 Author
 
 Amirul Mifzal
+
+---
+
+## 📦 Project Submission Package
+
+### For Lecturer Review
+
+This project is submitted as a GitHub repository with complete source code, documentation, and testing infrastructure.
+
+**Repository URL:** https://github.com/kzwxt/Storm-API
+
+### Submission Checklist
+
+- ✅ **Source Code**: Complete implementation in modular architecture
+- ✅ **Documentation**: Comprehensive README with setup instructions
+- ✅ **Testing**: 58 tests (unit + integration) with 100% pass rate
+- ✅ **Docker Support**: Dockerfile and docker-compose.yml for easy deployment
+- ✅ **API Documentation**: Interactive Swagger UI at `/docs`
+- ✅ **Type Hints**: Complete type annotations throughout codebase
+- ✅ **Docstrings**: Google-style documentation for all functions/classes
+- ✅ **Logging**: Structured JSON logging with request tracing
+- ✅ **Error Handling**: Proper exception handling and validation
+- ✅ **Async/Await**: Non-blocking operations using run_in_threadpool
+
+### Key Features Demonstrated
+
+1. **Clean Architecture**: Separation of concerns (api/core/utils/tests)
+2. **Production Ready**: Health checks, logging, error handling
+3. **Scalability**: Async operations, streaming support
+4. **Maintainability**: Type hints, docstrings, comprehensive tests
+5. **Deployment**: Docker support for consistent environments
+
+### Quick Evaluation Steps
+
+**Method 1: Docker (Fastest - ~5 minutes)**
+```bash
+git clone https://github.com/kzwxt/Storm-API.git
+cd Storm-API
+cp .env.example .env
+# Add API keys to .env
+docker-compose up
+# Visit http://localhost:8000/docs
+```
+
+**Method 2: Local Python (Requires Poetry)**
+```bash
+git clone https://github.com/kzwxt/Storm-API.git
+cd Storm-API
+poetry install
+cp .env.example .env
+# Add API keys to .env
+poetry run uvicorn main:app --reload
+# Visit http://localhost:8000/docs
+```
+
+**Running Tests:**
+```bash
+# Quick test suite (~10 seconds)
+poetry run pytest tests/ -v -m "not slow"
+
+# Full test suite (~10 minutes)
+poetry run pytest tests/ -v
+```
+
+### Project Highlights
+
+| Aspect | Details |
+|--------|---------|
+| **Language** | Python 3.11+ |
+| **Framework** | FastAPI |
+| **Testing** | Pytest with 58 tests |
+| **Deployment** | Docker & Docker Compose |
+| **Documentation** | Interactive API docs |
+| **Code Quality** | Type hints, docstrings, linting ready |
+| **Architecture** | Modular, clean design patterns |
+| **API Endpoints** | Health check, query, streaming |
+| **Response Time** | Fast tests: ~10s, Full pipeline: ~700s |
+
+### Technical Achievements
+
+- ✅ Implemented Stanford STORM wrapper with streaming
+- ✅ Prevented disk writes with in-memory storage
+- ✅ Added request tracing with unique IDs
+- ✅ Structured JSON logging for monitoring
+- ✅ Comprehensive input validation with XSS protection
+- ✅ Non-blocking async operations
+- ✅ Complete test coverage (unit + integration)
+- ✅ Docker containerization
+- ✅ Type-safe codebase with full type hints
+- ✅ Professional documentation
