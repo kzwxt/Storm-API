@@ -13,9 +13,11 @@ pydantic = "^2.10.0"
 knowledge-storm = "^1.1.0"
 python-dotenv = "^1.0.0"
 requests = "^2.31.0"
+pytest-asyncio = "^1.3.0"
+pytest-timeout = "^2.4.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0"
+pytest = "^9.0"
 
 [build-system]
 requires = ["poetry-core"]

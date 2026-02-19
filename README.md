@@ -186,7 +186,27 @@ All logs are structured JSON format:
 
 ## 🔍 Testing
 
-### Test streaming endpoint
+### Run all fast tests (unit + fast integration)
+```bash
+poetry run pytest tests/ -v -m "not slow"
+```
+
+### Run all tests (including slow integration tests)
+```bash
+poetry run pytest tests/ -v
+```
+
+### Run only integration tests
+```bash
+poetry run pytest tests/test_integration.py -v
+```
+
+### Run only slow integration tests (full STORM pipeline)
+```bash
+poetry run pytest tests/test_integration.py -v -m "slow"
+```
+
+### Test streaming endpoint manually
 ```bash
 cd tests
 python test_stream.py
@@ -203,6 +223,27 @@ python test_stream.py
 - Stanford STORM
 - DeepSeek (LLM)
 - Serper (Search)
+- Pytest (Testing)
+
+---
+
+## 📊 Test Coverage
+
+| Component | Tests | Type | Status |
+|-----------|-------|------|--------|
+| Request Validation | 7 | Unit | ✅ Complete |
+| StormService | 7 (4 fast, 3 slow) | Unit | ✅ Complete |
+| In-Memory Storage | 7 | Unit | ✅ Complete |
+| Streaming Callback | 13 | Unit | ✅ Complete |
+| Request ID Middleware | 10 | Unit | ✅ Complete |
+| Integration Tests | 14 (11 fast, 3 slow) | Integration | ✅ Complete |
+| **Total** | **58 (48 fast, 10 slow)** | - | ✅ **All Pass** |
+
+### Test Types
+- **Unit Tests (44)**: Fast, isolated tests with mocked dependencies (~10s)
+- **Integration Tests (14)**: End-to-end API tests
+  - **Fast (11)**: HTTP validation, headers, error handling (~10s)
+  - **Slow (3)**: Full STORM pipeline execution (~700s)
 
 ---
 
